@@ -1,0 +1,1 @@
+﻿In .Application we will hold Interfaces, but the implementation won't be in this project
