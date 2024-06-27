@@ -1,9 +1,8 @@
 ﻿using HR.LeaveManagement.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
-namespace HR.LeaveManagement.Persistence.DatabaseContext.Configurations
+namespace HR.LeaveManagement.Persistence.Configurations
 {
     public class LeaveTypeConfiguration
         : IEntityTypeConfiguration<LeaveType>

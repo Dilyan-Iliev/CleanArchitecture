@@ -5,10 +5,10 @@
         //we will have different interfaces that will inherit from this generic repository
         //but each next interface will have specific methods relative to each domain entity type
 
-        Task<IEnumerable<T>> GetAsync();
-        Task<T> GetByIdAsync(int id);
-        Task<T> CreateAsync(T entity);
-        Task<T> UpdateAsync(T entity);
-        Task<T> DeleteAsync(T entity);
+        Task<IReadOnlyList<T>> GetAsync();
+        Task<T?> GetByIdAsync(int id);
+        Task CreateAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task DeleteAsync(T entity);
     }
 }
