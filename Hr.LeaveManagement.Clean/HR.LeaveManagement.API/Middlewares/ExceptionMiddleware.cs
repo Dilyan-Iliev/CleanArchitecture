@@ -22,42 +22,42 @@ namespace HR.LeaveManagement.API.Middlewares
         private async Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
             //default status code
-            HttpStatusCode defaultStatusCode = HttpStatusCode.InternalServerError;
+            HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
+            object problem = default!;
 
-            var (statusCode, problem) = ex switch
+            switch (ex)
             {
-                BadRequestException badRequestEx => (
-                    HttpStatusCode.BadRequest,
-                    (object)new CustomProblemDetails
+                case BadRequestException badRequestEx:
+                    statusCode = HttpStatusCode.BadRequest;
+                    problem = new CustomProblemDetails
                     {
                         Title = badRequestEx.Message,
-                        Status = (int)HttpStatusCode.BadRequest,
+                        Status = (int)statusCode,
                         Detail = badRequestEx.InnerException?.Message,
                         Type = nameof(BadRequestException),
                         Errors = badRequestEx.ValidationErrors
-                    }
-                ),
-                NotFoundException notFoundEx => (
-                    HttpStatusCode.NotFound,
-                    (object)new CustomProblemDetails
+                    };
+                    break;
+                case NotFoundException notFoundEx:
+                    statusCode = HttpStatusCode.NotFound;
+                    problem = new CustomProblemDetails
                     {
                         Title = notFoundEx.Message,
-                        Status = (int)HttpStatusCode.NotFound,
+                        Status = (int)statusCode,
                         Detail = notFoundEx.InnerException?.Message,
                         Type = nameof(NotFoundException),
-                    }
-                ),
-                _ => (
-                    defaultStatusCode,
-                    (object)new CustomProblemDetails
+                    };
+                    break;
+                default:
+                    problem = new CustomProblemDetails
                     {
                         Title = ex.Message,
-                        Status = (int)defaultStatusCode,
+                        Status = (int)statusCode,
                         Detail = ex.StackTrace,
                         Type = nameof(HttpStatusCode.InternalServerError),
-                    }
-                )
-            };
+                    };
+                    break;
+            }
 
             context.Response.StatusCode = (int)statusCode;
             await context.Response.WriteAsJsonAsync(problem);
