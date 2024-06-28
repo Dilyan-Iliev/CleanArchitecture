@@ -1,0 +1,2 @@
+﻿In .API we will implement controllers using MediatR,
+connect with DB
