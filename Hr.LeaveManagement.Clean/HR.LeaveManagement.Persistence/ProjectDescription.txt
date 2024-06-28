@@ -1,0 +1,1 @@
+﻿In .Persistence we will introduce our DB context, EFC and implementations of repositories' interfaces

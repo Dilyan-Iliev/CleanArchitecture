@@ -1,0 +1,3 @@
+﻿In .Infrastructure we will host the implementations of repositories for the third party services :
+- for example for SendGrid for sending emails (the interfaces are in .Application/Contracts/Email)
+- for example Logging
