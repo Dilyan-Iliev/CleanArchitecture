@@ -1,5 +1,6 @@
 using HR.LeaveManagement.API.Middlewares;
 using HR.LeaveManagement.Application;
+using HR.LeaveManagement.Identity;
 using HR.LeaveManagement.Infrastructure;
 using HR.LeaveManagement.Persistence;
 
@@ -16,6 +17,7 @@ namespace HR.LeaveManagement.API
             builder.Services.AddApplicationServices();
             builder.Services.AddInfrastructureServices(builder.Configuration);
             builder.Services.AddPersistenceServices(builder.Configuration);
+            builder.Services.AddIdentityServices(builder.Configuration);
 
             builder.Services.AddControllers();
 
@@ -45,8 +47,10 @@ namespace HR.LeaveManagement.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseCors("all");
 
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
 
