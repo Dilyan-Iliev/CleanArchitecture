@@ -26,4 +26,10 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\LeaveTypes\" />
+    <Folder Include="Features\LeaveAllocations\" />
+    <Folder Include="Features\LeaveRequests\" />
+  </ItemGroup>
+
 </Project>
